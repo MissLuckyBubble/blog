@@ -1,24 +1,15 @@
-<html lang="en">
+<x-layout>
+    <x-slot name="content">
+    <article>
+        <h1>
+            {{$post->title}}
+        </h1>
+        <div>
+            {!! $post->body !!} // use !! only if you are in control of the date incoming
+                                // couse this mean it could be used scripts and html from other ppls
+        </div>
+    </article>
+    <a href="/">Go back</a>
+    </x-slot>
+</x-layout>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post</title>
-    <link rel="stylesheet" href="/app.css">
-
-</head>
-
-<body>
-        <article>
-            <h1>
-                <?=$post->title?>
-            </h1>
-            <div>
-                <?=$post->body?>
-            </div>
-        </article>
-        <a href="/">Go back</a>
-</body>
-
-</html>
