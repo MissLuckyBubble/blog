@@ -5,6 +5,8 @@
             {{$post->title}}
         </h1>
         <div>
+
+            <p>Caregory: <a href="/categories/{{$post->category->slug}}">{{$post->category->name}}</a></p>
             {!! $post->body !!} // use !! only if you are in control of the date incoming
                                 // couse this mean it could be used scripts and html from other ppls
         </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 
@@ -16,7 +17,7 @@ use App\Models\Post;
 */
 
 Route::get('/posts', function () {
-    $posts = Post::all();
+    $posts = Post::with('category')->get();
     return view('posts',[
         'posts' => $posts
     ]);
@@ -25,8 +26,15 @@ Route::get('/', function (){
    return redirect('/posts');
 });
 
-Route::get('posts/{post}', function ($id) {
+//moje da dobavim v samiq  class getRouteKeyName ili tuk da kajem koi key iskame da izpolzvame  'posts/{post:slug}'
+Route::get('posts/{post:slug}', function (Post $post) {
     return view('post',[
-        'post' => Post::findOrFail($id)
+        'post' => $post
     ]);
+});
+
+Route::get('categories/{category}', function (Category $category){
+   return view('posts', [
+       'posts' =>$category->posts
+   ]) ;
 });

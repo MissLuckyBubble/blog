@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>My Blog</h1>
-<br>
+<hr>
 {{$content}}
 </body>
 </html>
