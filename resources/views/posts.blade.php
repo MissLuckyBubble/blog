@@ -7,7 +7,12 @@
                     <h1>{{$post->title}}</h1>
                 </a>
                 <div>
-                    <p>Caregory: <a href="/categories/{{$post->category->slug}}"> {{$post->category->name}}</a></p>
+                    <p>
+                        By <a href="/authors/{{$post->author->name}}">{{$post->author->name}}</a>
+                        in Caregory:
+                        <a href="/categories/{{$post->category->slug}}">
+                            {{$post->category->name}}</a>
+                    </p>
                     {{$post->excerpt}}
                 </div>
             </article>

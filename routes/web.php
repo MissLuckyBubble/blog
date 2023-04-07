@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 
@@ -17,7 +18,10 @@ use App\Models\Post;
 */
 
 Route::get('/posts', function () {
-    $posts = Post::with('category')->get();
+    //latest means a order,
+    // if we have a date that we want to order we can latest('date')
+    // we are doing with(..) to load everythin so we dont do +1 sqls for eevry post
+    $posts = Post::latest()->with('category','author')->get();
     return view('posts',[
         'posts' => $posts
     ]);
@@ -37,4 +41,10 @@ Route::get('categories/{category}', function (Category $category){
    return view('posts', [
        'posts' =>$category->posts
    ]) ;
+});
+
+Route::get('authors/{author:name}', function (User $author){
+    return view('posts', [
+        'posts' => $author->posts
+    ]) ;
 });

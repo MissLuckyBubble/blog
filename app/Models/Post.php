@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Faker\Provider\Lorem;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,5 +22,8 @@ class Post extends Model
     public function category(){
         // hasOne, hasMany, belongTo, belongsToMany
         return $this->belongsTo(Category::class);
+    }
+    public function author(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
