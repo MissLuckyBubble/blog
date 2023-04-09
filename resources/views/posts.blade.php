@@ -1,21 +1,12 @@
 <x-layout>
     <x-slot name="content">
-
-        @foreach ($posts as $post)
-            <article class="{{$loop->even ? 'foobar' : ''}}">
-                <a href="/posts/{{$post->slug}}">
-                    <h1>{{$post->title}}</h1>
-                </a>
-                <div>
-                    <p>
-                        By <a href="/authors/{{$post->author->name}}">{{$post->author->name}}</a>
-                        in Caregory:
-                        <a href="/categories/{{$post->category->slug}}">
-                            {{$post->category->name}}</a>
-                    </p>
-                    {{$post->excerpt}}
-                </div>
-            </article>
-        @endforeach
+        @include('_posts-header')
+        <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+            @if($posts->count())
+                <x-post-grid :posts="$posts"></x-post-grid>
+            @else
+                <p class="text-center">No posts yet. Please check back later..</p>
+            @endif
+        </main>
     </x-slot>
 </x-layout>

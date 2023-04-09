@@ -8,6 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+
+    //load this model with category in author it solve the db 1+1 problem
+    //if we need somewhere to load it without this we can use
+    //whitout('author')
+    protected $with = ['category' , 'author'];
     public function getRouteKeyName()
     {
         //kogato iskame da izpolzvame drug atribute vmesto id za prehvurlqne
