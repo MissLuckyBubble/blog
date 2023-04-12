@@ -18,16 +18,17 @@ use App\Models\Post;
 */
 
 Route::get('/posts', function () {
-    //latest means a order,
-    // if we have a date that we want to order we can latest('date')
-    // we are doing with(..) to load everythin so we dont do +1 sqls for eevry post
+    //latest means an order,
+    // if we have a date that we want to order we can do latest('date')
+    // we are doing with(..) to load everything, so we don't do +1 sqls for eevry post
     // $posts = Post::latest()->with('category','author')->get();
     // $posts = Post::latest()->without('category','author')->get();
-    $posts = Post::latest()->get();
-    return view('posts', [
-        'posts' => $posts
+
+    return view('posts',[
+        'posts' => Post::latest()->get(),
+        'categories' => Category::all()
     ]);
-});
+})->name('home');
 Route::get('/', function () {
     return redirect('/posts');
 });
@@ -35,19 +36,23 @@ Route::get('/', function () {
 //moje da dobavim v samiq  class getRouteKeyName ili tuk da kajem koi key iskame da izpolzvame  'posts/{post:slug}'
 Route::get('posts/{post:slug}', function (Post $post) {
     return view('post', [
-        'post' => $post
+        'post' => $post,
+        'categories' => Category::all()
     ]);
 });
 
 Route::get('categories/{category}', function (Category $category) {
     return view('posts', [
-        'posts' => $category->posts
+        'posts' => $category->posts,
+        'currentCategory' => $category,
+        'categories' => Category::all()
     ]);
-});
+})->name('categoriy');
 
 Route::get('authors/{author:username}', function (User $author) {
     return view('posts', [
         //'posts' => $author->posts->load(['category','author'])
-        'posts' => $author->posts
+        'posts' => $author->posts,
+        'categories' => Category::all()
     ]);
 });

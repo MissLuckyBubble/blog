@@ -1,3 +1,4 @@
+@props(['$posts'])
 <x-layout>
     <x-slot name="content">
         @include('_posts-header')
